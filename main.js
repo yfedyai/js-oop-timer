@@ -25,11 +25,7 @@ class Timer  {
                 this.backToDefault();
                 
             } 
-            
-        
-        
-        const currentWidth = this.progressBar.offsetWidth;
-        
+        const currentWidth = this.progressBar.offsetWidth;       
         const step = Math.round(this.width/(this.seconds)); 
         this.displayTimeLeft(this.secondsLeft);
         
@@ -67,6 +63,8 @@ class Timer  {
         
         container.append(this.createProgressBar());
         this.width = this.progressBar.offsetWidth;
+        console.log(' this.progressBar.style.width;: ',  this.progressBar);
+        
         this.displayTimeLeft(this.seconds);
         this.button.addEventListener("click", this.checkClick.bind(this))
         
@@ -94,8 +92,12 @@ class Timer  {
     backToDefault() {
         this.button.textContent = "Start";
         this.secondsLeft = this.seconds;
-        this.progressBar.style.offsetWidth = `${100}%`;
+        this.progressBar.style.width = `${100}%`;
         this.displayTimeLeft(this.seconds);
         
     }
 }
+
+
+
+timer = new Timer(5);
