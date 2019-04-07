@@ -4,21 +4,11 @@ const container = document.querySelector('#container');
 
 class Timer  {
     constructor(seconds){
-        if (seconds <= 0 || typeof seconds != 'number') {
-            try {
-                throw new Error('Incorrect input!');
-            } catch (e) {
-                console.log(e.name + ': ' + e.message);
-                return
-            }
-        }
+        if (seconds <= 0 || typeof seconds != 'number') throw new Error ('Input must be an integer than higher 0');
         this.seconds = seconds;
         this.secondsLeft = this.seconds;
         this.render();
-        
-        
-          
- 
+
     }
 
     timerStart() {      
@@ -113,6 +103,7 @@ class TimerChecker extends Timer {
     constructor(seconds, checker){
         super(seconds);
         this.checker = checker;
+        if (typeof this.checker != "boolean") throw new Error ("second parameter must me boolean");
         this.checkTimerStatus();
         
     }
