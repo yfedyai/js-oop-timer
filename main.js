@@ -94,7 +94,7 @@ class Timer  {
 
 
 
-// timer = new Timer(5);
+timer = new Timer(10);
 
 
 
@@ -124,4 +124,4 @@ class TimerChecker extends Timer {
 
 }
 
-// timer2 = new TimerChecker(10000,true);
+timer2 = new TimerChecker(10000,true);
