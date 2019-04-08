@@ -101,9 +101,10 @@ class Timer  {
 
 class TimerChecker extends Timer {
     constructor(seconds, checker){
-        super(seconds);
-        this.checker = checker;
-        if (typeof this.checker != "boolean") throw new Error ("second parameter must me boolean");
+        if (typeof checker != "boolean") throw new Error("second parameter must me boolean");
+        super(seconds); 
+        console.log (typeof checker)
+        this.checker = checker; 
         this.checkTimerStatus();
         
     }
