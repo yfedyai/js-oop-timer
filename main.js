@@ -2,29 +2,30 @@ const container = document.querySelector('#container');
 
 
 
-class Timer  {
-    constructor(seconds){
-        if (seconds <= 0 || typeof seconds != 'number') throw new Error ('Input must be an integer than higher 0');
+class Timer {
+    constructor(seconds) {
+        if (seconds <= 0 || typeof seconds != 'number') throw new Error('Input must be an integer than higher 0');
         this.seconds = seconds;
         this.secondsLeft = this.seconds;
         this.render();
 
     }
 
-    timerStart() {      
-        
+    timerStart() {
+
         this.contdown = setInterval(() => {
-            if (this.secondsLeft > 0) {        
-                this.secondsLeft-=1;  
-            }    
+            if (this.secondsLeft > 0) {
+                this.secondsLeft -= 1;
+            }
             else {
                 clearInterval(this.contdown);
                 this.resetTimer();
-                return        
-            }       
-        this.displayTimeLeft(this.secondsLeft); 
-        this.decreaseProgessBar();
-        },1000);
+                this.contdown = null
+                return
+            }
+            this.displayTimeLeft(this.secondsLeft);
+            this.decreaseProgessBar();
+        }, 1000);
     }
 
     timerStop() {
@@ -38,7 +39,7 @@ class Timer  {
     }
 
 
-    displayTimeLeft(timeLeft){
+    displayTimeLeft(timeLeft) {
         const minutes = Math.floor(timeLeft / 60);
         const remaindSeconds = timeLeft % 60;
         this.blockTimer.innerText = `${minutes}:${remaindSeconds < 10 ? '0' : ''}${remaindSeconds}`;
@@ -52,7 +53,7 @@ class Timer  {
     }
 
 
-    
+
 
 
 
@@ -64,64 +65,38 @@ class Timer  {
         this.button = document.createElement("button");
         this.button.classList.add("start-stop-button");
         this.button.textContent = "Start";
-        container.append(this.button); 
+        container.append(this.button);
         container.append(this.createProgressBar());
-        this.width = this.progressBar.offsetWidth; 
+        this.width = this.progressBar.offsetWidth;
         this.displayTimeLeft(this.seconds);
-        this.button.addEventListener("click", this.checkClick.bind(this));   
+        this.button.addEventListener("click", this.checkClick.bind(this));
     }
 
     checkClick() {
-        if (this.button.textContent === "Start" ) {
+        if (this.button.textContent === "Start") {
             this.button.textContent = "Stop";
             this.timerStart();
         }
 
-        else{
+        else {
             this.button.textContent = "Start";
             this.timerStop();
         }
     }
-    
+
     resetTimer() {
         this.progressBar.style.width = `${100}%`;
         this.button.textContent = "Start";
         this.secondsLeft = this.seconds;
         this.displayTimeLeft(this.seconds);
-        
+
     }
 }
 
 
 
-timer = new Timer(10);
+new Timer(10);
 
 
 
 
-class TimerChecker extends Timer {
-    constructor(seconds, checker){
-        if (typeof checker != "boolean") throw new Error("second parameter must me boolean");
-        super(seconds); 
-        console.log (typeof checker)
-        this.checker = checker; 
-        this.checkTimerStatus();
-        
-    }
-    
-    checkTimerStatus () {
-        if (this.checker &&  this.checker == true) {
-            this.button.textContent = "Start";
-            this.checkClick();
-        }
-        else {
-            this.button.textContent = "Stop";
-            this.checkClick();
-        }
-
-    }
-        
-
-}
-
-timer2 = new TimerChecker(10000,true);
